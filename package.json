@@ -1,15 +1,16 @@
 {
-  "name": "puppeteer-api",
+  "name": "edgedb-api",
   "version": "1.0.50",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
-    "elysia": "latest",
-    "puppeteer": "22.7.1"
+    "edgedb": "^1.5.5",
+    "elysia": "latest"
   },
   "devDependencies": {
+    "@edgedb/generate": "^0.5.3",
     "bun-types": "latest"
   },
   "module": "src/index.js"

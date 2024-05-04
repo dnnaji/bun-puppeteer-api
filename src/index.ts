@@ -1,22 +1,16 @@
 import { Elysia, t, NotFoundError } from 'elysia';
 import { handleError } from '$lib/error';
 import { Browser } from 'puppeteer';
-import { app as puppeteerApp } from './server-puppeteer';
+import { app as moviesApp } from './server-movies';
 
 const app = new Elysia()
-  .use(puppeteerApp)
+  // .use(puppeteerApp)
+  .use(moviesApp)
   .onError((err) => handleError(err))
-  .onStart(async ({ browser }) => {
+  .onStart(async () => {
     console.log('💫 Elysia start!');
-    if (browser && browser instanceof Browser) {
-      console.log('Browser version :', await browser.version());
-    }
   })
-  .onStop(async ({ browser }) => {
-    if (browser && browser instanceof Browser) {
-      await browser.close();
-      console.log('Browser is closed!');
-    }
+  .onStop(async () => {
     console.log('💤 Elysia stop!');
   });
 
