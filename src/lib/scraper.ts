@@ -3,7 +3,7 @@ import { sleep } from 'bun';
 
 export const launchBrowser = async () => {
   return await puppeteer.launch({
-    headless: true,
+    headless: "new",
     executablePath: process.env.CHROME_BIN,
     args: [
       // Required for Docker version of Puppeteer
