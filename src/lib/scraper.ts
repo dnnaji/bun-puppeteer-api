@@ -3,10 +3,17 @@ import { sleep } from 'bun';
 
 export const launchBrowser = async () => {
   return await puppeteer.launch({
-    headless: 'new',
-    args: ['--no-sandbox'], // (도커) root 실행 아니더라도 필요하다
-    executablePath:
-      './chrome/mac_arm-117.0.5938.92/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing',
+    headless: true,
+    executablePath: process.env.CHROME_BIN,
+    args: [
+      // Required for Docker version of Puppeteer
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      // This will write shared memory files into /tmp instead of /dev/shm,
+      // because Docker’s default for /dev/shm is 64MB
+      '--disable-dev-shm-usage'
+    ]
+    // executablePath:'./chrome/mac_arm-126.0.6458.0/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing',
   });
 };
 
